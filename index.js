@@ -23,8 +23,8 @@ var walls = {
 var walls2 = {
   front: {x: 2000, y: 0, z: -1000},
   back: {x: 2000, y: 0, z: 1000},
-  left: {x: 1050, y: 0, z: 0},
-  right: {x: 2950, y: 0, z: 0}
+  left: {x: 1000, y: 0, z: 0},
+  right: {x: 3000, y: 0, z: 0}
 };
 
 //init();
@@ -78,14 +78,14 @@ function init() {
   back_wall.position.z = walls.back.z;
   scene.add(back_wall);
 
-  var left_wall = createMesh([2000, 1300, 10], 'painting.JPG');
+  var left_wall = createMesh([2000, 1300, 10], 'library_long_image.jpg');
   left_wall.position.x = walls.left.x;
   left_wall.position.y = walls.left.y;
   left_wall.position.z = walls.left.z;
   left_wall.rotation.y = 1.57;
   scene.add(left_wall);
 
-  var right_wall = createMesh([2000, 1300, 10], 'library_long_image.jpg');
+  var right_wall = createMesh([2000, 1300, 10], 'painting.JPG');
   right_wall.position.x = walls.right.x;
   right_wall.position.y = walls.right.y;
   right_wall.position.z = walls.right.z;
@@ -116,38 +116,38 @@ function init() {
     book.position.y = -230;
   });
 
-  drawRadar();
+  //drawRadar();
   /* Room 2 */
-var floor2 = createMesh([2000, 10, 2000], 'Library_Ceiling.jpg');
+  var floor2 = createMesh([2000, 10, 2000], 'Library_Ceiling.jpg');
   floor2.position.x = 2000;
   floor2.position.y = -650;
   scene.add(floor2);
 
-  var ceiling2 = createMesh([2000, 10, 2000], 'NYC_ceiling.jpg');
+  var ceiling2 = createMesh([2000, 10, 2000], 'wood_ceiling.jpeg');
   ceiling2.position.x = 2000;
   ceiling2.position.y = 650;
   scene.add(ceiling2);
 
-  var front_wall2 = createMesh([2000, 1300, 10], 'library_long_image.jpg');
+  var front_wall2 = createMesh([2000, 1300, 10], 'book_wall.jpg');
   front_wall2.position.x = walls2.front.x;
   front_wall2.position.y = walls2.front.y;
   front_wall2.position.z = walls2.front.z;
   scene.add(front_wall2);
 
-  var back_wall2 = createMesh([2000, 1300, 10], 'library_long_image.jpg');
+  var back_wall2 = createMesh([2000, 1300, 10], 'book_wall.jpg');
   back_wall2.position.x = walls2.back.x;
   back_wall2.position.y = walls2.back.y;
   back_wall2.position.z = walls2.back.z;
   scene.add(back_wall2);
 
-  var left_wall2 = createMesh([2000, 1300, 10], 'painting.JPG');
+  var left_wall2 = createMesh([2000, 1300, 10], 'book_wall.jpg');
   left_wall2.position.x = walls2.left.x;
   left_wall2.position.y = walls2.left.y;
   left_wall2.position.z = walls2.left.z;
   left_wall2.rotation.y = 1.57;
   scene.add(left_wall2);
 
-  var right_wall2 = createMesh([2000, 1300, 10], 'library_long_image.jpg');
+  var right_wall2 = createMesh([2000, 1300, 10], 'book_wall.jpg');
   right_wall2.position.x = walls2.right.x;
   right_wall2.position.y = walls2.right.y;
   right_wall2.position.z = walls2.right.z;
@@ -161,7 +161,7 @@ var floor2 = createMesh([2000, 10, 2000], 'Library_Ceiling.jpg');
 
   window.addEventListener('resize', onWindowResize, false);
 
-  document.getElementById('radar').addEventListener('click', onRadarClick, false);
+  //document.getElementById('radar').addEventListener('click', onRadarClick, false);
 
   if(GameShim.supports.pointerLock) {
     document.documentElement.requestPointerLock();
@@ -172,7 +172,7 @@ function animate() {
   // note: three.js includes requestAnimationFrame shim
   requestAnimationFrame(animate);
   renderer.render(scene, cam);
-  drawMap();
+  //drawMap();
   var delta = clock.getDelta();
   controls.update(delta);
 }
@@ -280,8 +280,8 @@ function drawMap() {
 function drawPlayerInMap() {
   //console.log(cam.position.x, cam.position.z);
   //FIXME: what is this? :o
-  var x = (cam.position.x < 0) ? ((1050 - Math.abs(cam.position.x)) * 0.067) : (cam.position.x == 0) ? 66.67: (100 + (cam.position.x * 0.067));
-  var y = (cam.position.z < 0) ? ((1050 - Math.abs(cam.position.z)) * 0.067) : (cam.position.z == 0) ? 66.67: (100 + (cam.position.z * 0.067));
+  var x = (cam.position.x < 0) ? ((1000 - Math.abs(cam.position.x)) * 0.067) : (cam.position.x == 0) ? 66.67: (100 + (cam.position.x * 0.067));
+  var y = (cam.position.z < 0) ? ((1000 - Math.abs(cam.position.z)) * 0.067) : (cam.position.z == 0) ? 66.67: (100 + (cam.position.z * 0.067));
   //var y = (cam.position.z / 10);
   //console.log(x, y);
   //x = (x > 200) ? 200 : (x < 0) ? 0 : x;
@@ -298,14 +298,14 @@ function onRadarClick(event) {
   console.log(event);
   var x = event.clientX;
   if(x < 66.67) {
-    x = (x * 15) - 1050;
+    x = (x * 15) - 1000;
   }
   else {
     x = x * 15;
   }
   var y = event.clientY - 200;
   if(y < 66.67) {
-    y = (y * 15) - 1050;
+    y = (y * 15) - 1000;
   }
   else {
     y = y * 15;
