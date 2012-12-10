@@ -3,11 +3,11 @@ old_mouseX = 0,
 actualLookSpeed = 1,
 thetaD = 0;
 
-document.addEventListener( 'mousemove', bind( this, onMouseMove ), false );
+document.addEventListener('mousemove', bind(this, onMouseMove), false);
 
-function bind( scope, fn ) {
+function bind(scope, fn) {
   return function () {
-    fn.apply( scope, arguments );
+    fn.apply(scope, arguments);
   };
 };
 
@@ -47,6 +47,7 @@ function init() {
 
   if(!Detector.webgl) {
     Detector.addGetWebGLMessage(document.body);
+    return;
   }
   clock = new t.Clock();
   cam = new t.PerspectiveCamera(60, ASPECT, 1, 10000); // Field Of Viw, aspect ratio, near, far
@@ -55,13 +56,9 @@ function init() {
   cam.lookAt(new THREE.Vector3(-20, 0, -400));
 
   t.Object3D._threexDomEvent.camera(cam);
-  // Camera moves with mouse, flies around with WASD/arrow keys
-/*  controls = new t.FirstPersonControls(cam); // Handles camera control
+  controls = new t.FirstPersonControls(cam); //using modified version of FirstPersonControls.js
   controls.movementSpeed = MOVESPEED; // How fast the player can walk around
-  controls.lookSpeed = LOOKSPEED; // How fast the player can look around with the mouse
-  controls.lookVertical = false; //   Don't allow the player to look up or down. This is a temporary fix to keep people from flying
-  controls.noFly = false; // Don't allow hitting R or F to go up or down
-*/
+
   var UNITSIZE = 100;
   var units = 1;
 
@@ -197,10 +194,13 @@ function animate() {
 }
 
 function render(){
-  controls();
+  mouseControls();
   renderer.render(scene, cam);
-}  
-function controls() {
+  controls.update(clock.getDelta());
+}
+//TODO: rename the following function to better represent
+//its functionality
+function mouseControls() {
   thetaD -= deltaX * actualLookSpeed;
   theta = thetaD * Math.PI / 180;
   lookPoint = new THREE.Vector3(0,0,0);
