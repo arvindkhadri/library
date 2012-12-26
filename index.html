@@ -1,39 +1,23 @@
-<!-- -*- coding: utf-8 -*-->
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-    <style>
-      body {
-        margin: 0px;
-        padding: 0px;
-        overflow: hidden;
-      }
-
-    </style>
-    <!--script type="text/javascript" src="http://code.jquery.com/jquery-1.8.1.min.js"></script-->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="lib/Detector.js"></script>
-    <script type="text/javascript" src="lib/Three.js"></script>
-    <script type="text/javascript" src="lib/Three.FirstPersonControls.js"></script>
-    <script type="text/javascript" src="lib/threex.domevent.js"></script>
-    <script type="text/javascript" src="lib/threex.domevent.object3d.js"></script>
-    <script type="text/javascript" src="lib/game-shim.js"></script>
-  </head>
-  <body>
-    <canvas id="radar" width="200px" height="200px"></canvas>
-      <script type="text/javascript" src="index.js"></script>
-      <script type="text/javascript">
-        /* 
-           load event fires at the end of the document loading process. 
-           At this point, all of the objects in the document are in the DOM,
-           and all the images and sub-frames have finished loading.
-         */
-        window.onload = function() {
-          init();
-          animate();
-        };
-      </script>
-   </body>
+<head>
+    <title>A 3D Walk</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <script>
+      window.G = {};
+      window.onload = function() {
+        G.load();
+      };
+    </script>
+    <script src="js/lib/Detector.js"></script>
+    <!--script src="//raw.github.com/mrdoob/three.js/dev/build/three.js"></script-->
+    <script src="js/lib/three.js"></script>
+    <script src="js/lib/Three.FirstPersonControls.js"></script>
+    <!--script src="js/lib/threex.domevent.js"></script>
+    <script src="js/lib/threex.domevent.object3d.js"></script-->
+    <script src="js/lib/game-shim.js"></script>
+    <script src="js/main.js"></script>
+</body>
 </html>
-
