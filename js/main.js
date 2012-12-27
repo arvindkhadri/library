@@ -7,6 +7,20 @@
 
   G.meshes = [];
 
+  // the books db
+  G.books_db = [
+    {
+      id: 1,
+      dimensions: [0.1, 0.45, 0.4],
+      faces: []
+    },
+    {
+      id: 2,
+      dimensions: [0.1, 0.45, 0.4],
+      faces: []
+    }
+  ];
+
   G.init = function(result) {
     this.clock = new t.Clock();
     this.deltaX = 0;
@@ -19,18 +33,21 @@
     /* Camera!! */
     this.cam = new t.PerspectiveCamera(60, ASPECT, 0.1, 1000);
 
-    //t.Object3D._threexDomEvent.camera(this.cam);
+    t.Object3D._threexDomEvent.camera(this.cam);
 
     this.controls = new t.FirstPersonControls(this.cam);
     this.controls.movementSpeed = MOVESPEED;
 
     this.scene.add(this.cam);
-    this.cam.position.set(7,2,-1);
+    this.cam.position.set(7, 2, -1);
+
 
     /* Lights!! */
     this.light = new t.PointLight(0xffffff, 0.8, 100); 
     this.light.position.set(0, -20, 0);
     this.scene.add(this.light);
+
+    this.initBooks();
 
     this.renderer = new t.WebGLRenderer({antialias: true});
     this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -90,4 +107,26 @@
     G.cam.lookAt(lookpoint);
     G.deltaX = 0;
   };
+
+  G.initBooks = function() {
+    var z = -1;
+    for(var i = 0; i < this.books_db.length; i++) {
+      var dim = this.books_db[i].dimensions;
+      var mesh = new t.Mesh(
+        new t.CubeGeometry(dim[0], dim[1], dim[2]),
+        new t.MeshBasicMaterial({color: '0xff0000'})
+      );
+      mesh.position.set(1, 1.86, z);
+      mesh.rotation.set(0, 1.57, 0);
+      mesh.on('click', G.onBookClick);
+      this.meshes.push(mesh);
+      this.scene.add(mesh);
+      z += 0.2;
+    }
+  };
+
+  G.onBookClick = function(event) {
+    // get the book.URL and open it in a new window
+    console.log(event);
+  }
 //)(G);
